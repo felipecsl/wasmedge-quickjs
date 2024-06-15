@@ -1,13 +1,11 @@
 use super::core::chunk::HttpChunk;
 use super::core::request::HttpRequest;
 use super::core::ParseError;
-use crate::event_loop::AsyncTcpConn;
 use crate::internal_module::httpx::core::response::{BodyLen, HttpResponse};
 use crate::internal_module::httpx::core::Version::V1_1;
-use crate::{
-    register_class, AsObject, Context, JsClassDef, JsClassProto, JsClassTool, JsFn, JsModuleDef,
-    JsObject, JsValue, ModuleInit,
-};
+use crate::js_class::{register_class, JsClassDef, JsClassField, JsClassMethod, JsClassTool};
+use crate::js_module::{JsModuleDef, ModuleInit};
+use crate::{AsObject, Context, JsObject, JsValue};
 use std::collections::HashMap;
 use std::fmt::format;
 use std::io::BufReader;
@@ -156,13 +154,13 @@ impl JsClassDef for Buffer {
         }
     }
 
-    const FIELDS: &'static [crate::JsClassField<Self::RefType>] = &[
+    const FIELDS: &'static [JsClassField<Self::RefType>] = &[
         ("length", Self::js_length, None),
         ("byteLength", Self::js_length, None),
         ("buffer", Self::js_buffer, None),
     ];
 
-    const METHODS: &'static [crate::JsClassMethod<Self::RefType>] = &[
+    const METHODS: &'static [JsClassMethod<Self::RefType>] = &[
         ("append", 1, Self::js_append),
         ("write", 1, Self::js_append),
         ("parseRequest", 0, Self::js_parse_request),
@@ -329,7 +327,7 @@ impl JsClassDef for HttpRequest {
         })
     }
 
-    const FIELDS: &'static [crate::JsClassField<Self::RefType>] = &[
+    const FIELDS: &'static [JsClassField<Self::RefType>] = &[
         ("body", Self::js_get_body, Some(Self::js_set_body)),
         ("headers", Self::js_get_headers, Some(Self::js_set_headers)),
         ("method", Self::js_get_method, Some(Self::js_set_method)),
@@ -337,7 +335,7 @@ impl JsClassDef for HttpRequest {
         ("uri", Self::js_get_uri, Some(Self::js_set_uri)),
     ];
 
-    const METHODS: &'static [crate::JsClassMethod<Self::RefType>] = &[
+    const METHODS: &'static [JsClassMethod<Self::RefType>] = &[
         ("encode", 0, Self::js_encode),
         ("getHeader", 1, Self::js_get_header),
         ("setHeader", 1, Self::js_set_header),
@@ -480,7 +478,7 @@ impl JsClassDef for HttpResponse {
     const CLASS_NAME: &'static str = "WasiResponse";
     const CONSTRUCTOR_ARGC: u8 = 0;
 
-    const FIELDS: &'static [crate::JsClassField<Self::RefType>] = &[
+    const FIELDS: &'static [JsClassField<Self::RefType>] = &[
         (
             "bodyLength",
             Self::js_get_body_length,
@@ -496,7 +494,7 @@ impl JsClassDef for HttpResponse {
         ),
     ];
 
-    const METHODS: &'static [crate::JsClassMethod<Self::RefType>] =
+    const METHODS: &'static [JsClassMethod<Self::RefType>] =
         &[("encode", 0, Self::js_encode), ("chunk", 1, Self::js_chunk)];
 
     unsafe fn mut_class_id_ptr() -> &'static mut u32 {
@@ -623,9 +621,9 @@ impl JsClassDef for WasiChunkResponse {
     const CLASS_NAME: &'static str = "ChunkResponse";
     const CONSTRUCTOR_ARGC: u8 = 0;
 
-    const FIELDS: &'static [crate::JsClassField<Self::RefType>] = &[];
+    const FIELDS: &'static [JsClassField<Self::RefType>] = &[];
 
-    const METHODS: &'static [crate::JsClassMethod<Self::RefType>] = &[
+    const METHODS: &'static [JsClassMethod<Self::RefType>] = &[
         ("on", 2, Self::js_on),
         ("write", 1, Self::js_write),
         ("end", 1, Self::js_end),
@@ -648,6 +646,7 @@ impl JsClassDef for WasiChunkResponse {
 mod js_url {
     use std::ops::{Deref, DerefMut};
 
+    use js_class::{JsClassDef, JsClassField, JsClassMethod};
     use url::quirks::password;
 
     use crate::*;

@@ -1,7 +1,8 @@
 #![allow(dead_code, unused_imports, unused_must_use)]
 
 use std::borrow::{Borrow, BorrowMut};
-use wasmedge_quickjs::*;
+
+use wasmedge_quickjs_lib::{JsValue, Runtime};
 
 fn args_parse() -> (String, Vec<String>) {
     use argparse::ArgumentParser;
@@ -19,12 +20,11 @@ fn args_parse() -> (String, Vec<String>) {
     (file_path, res_args)
 }
 
-#[tokio::main(flavor = "current_thread")]
+#[tokio::main]
 async fn main() {
-    use wasmedge_quickjs as q;
     env_logger::init();
 
-    let mut rt = q::Runtime::new();
+    let mut rt = Runtime::new();
 
     let r = rt
         .async_run_with_context(Box::new(|ctx| {

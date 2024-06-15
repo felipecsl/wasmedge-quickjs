@@ -1,5 +1,6 @@
+use js_class::{register_class, JsClassDef, JsClassField, JsClassMethod, JsClassTool};
+
 use crate::quickjs_sys::*;
-use crate::EventLoop;
 use std::string::FromUtf8Error;
 use std::sync::Arc;
 

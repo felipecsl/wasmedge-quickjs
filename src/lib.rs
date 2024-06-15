@@ -7,5 +7,4 @@ mod internal_module;
 mod quickjs_sys;
 
 pub use event_loop::EventLoop;
-
 pub use quickjs_sys::*;

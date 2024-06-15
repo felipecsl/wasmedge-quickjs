@@ -1,3 +1,4 @@
+use crate::js_module::JsModuleDef;
 use std::borrow::Cow;
 
 use crate::quickjs_sys::*;
