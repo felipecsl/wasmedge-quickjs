@@ -1423,95 +1423,91 @@ extern "C" {
     );
 }
 extern "C" {
-    pub fn JS_ValueGetTag_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_ValueGetTag(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_FreeValue_real(ctx: *mut JSContext, v: JSValue);
+    pub fn JS_FreeValue(ctx: *mut JSContext, v: JSValue);
 }
 extern "C" {
-    pub fn JS_FreeValueRT_real(rt: *mut JSRuntime, v: JSValue);
+    pub fn JS_FreeValueRT(rt: *mut JSRuntime, v: JSValue);
 }
 extern "C" {
-    pub fn JS_DupValue_real(ctx: *mut JSContext, v: JSValue) -> JSValue;
+    pub fn JS_DupValue(ctx: *mut JSContext, v: JSValue) -> JSValue;
 }
 extern "C" {
-    pub fn JS_DupValueRT_real(rt: *mut JSRuntime, v: JSValue) -> JSValue;
+    pub fn JS_DupValueRT(rt: *mut JSRuntime, v: JSValue) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewFloat64_real(ctx: *mut JSContext, d: f64) -> JSValue;
+    pub fn JS_NewFloat64(ctx: *mut JSContext, d: f64) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewInt32_real(ctx: *mut JSContext, val: i32) -> JSValue;
+    pub fn JS_NewInt32(ctx: *mut JSContext, val: i32) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewInt64_real(ctx: *mut JSContext, val: i64) -> JSValue;
+    pub fn JS_NewInt64(ctx: *mut JSContext, val: i64) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewBool_real(ctx: *mut JSContext, val: ::std::os::raw::c_int) -> JSValue;
+    pub fn JS_NewBool(ctx: *mut JSContext, val: ::std::os::raw::c_int) -> JSValue;
 }
 extern "C" {
-    pub fn JS_VALUE_IS_NAN_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_VALUE_IS_NAN(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_VALUE_GET_FLOAT64_real(v: JSValue) -> f64;
+    pub fn JS_VALUE_GET_FLOAT64(v: JSValue) -> f64;
 }
 extern "C" {
-    pub fn JS_VALUE_GET_NORM_TAG_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_VALUE_GET_NORM_TAG(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_VALUE_GET_PTR_real(v: JSValue) -> *mut ::std::os::raw::c_void;
+    pub fn JS_VALUE_GET_PTR(v: JSValue) -> *mut ::std::os::raw::c_void;
 }
 extern "C" {
-    pub fn JS_IsNumber_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsNumber(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsBigInt_real(ctx: *mut JSContext, v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsBigInt(ctx: *mut JSContext, v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsBigFloat_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsBigFloat(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsBigDecimal_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsBigDecimal(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsBool_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsBool(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsNull_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsNull(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsUndefined_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsUndefined(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsException_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsException(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsUninitialized_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsUninitialized(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsString_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsString(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsSymbol_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsSymbol(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_IsObject_real(v: JSValue) -> ::std::os::raw::c_int;
+    pub fn JS_IsObject(v: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn JS_IsPromise(ctx: *mut JSContext, val: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_GetPromiseResult_real(ctx: *mut JSContext, this_val: JSValue) -> JSValue;
+    pub fn JS_GetPromiseResult(ctx: *mut JSContext, this_val: JSValue) -> JSValue;
 }
 extern "C" {
-    pub fn JS_ToUint32_real(
-        ctx: *mut JSContext,
-        pres: *mut u32,
-        val: JSValue,
-    ) -> ::std::os::raw::c_int;
+    pub fn JS_ToUint32(ctx: *mut JSContext, pres: *mut u32, val: JSValue) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_SetProperty_real(
+    pub fn JS_SetProperty(
         ctx: *mut JSContext,
         this_obj: JSValue,
         prop: JSAtom,
@@ -1519,7 +1515,7 @@ extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn JS_NewCFunction_real(
+    pub fn JS_NewCFunction(
         ctx: *mut JSContext,
         func: JSCFunction,
         name: *const ::std::os::raw::c_char,
@@ -1527,7 +1523,7 @@ extern "C" {
     ) -> JSValue;
 }
 extern "C" {
-    pub fn JS_NewCFunctionMagic_real(
+    pub fn JS_NewCFunctionMagic(
         ctx: *mut JSContext,
         func: JSCFunctionMagic,
         name: *const ::std::os::raw::c_char,
